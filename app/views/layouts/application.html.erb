@@ -13,6 +13,13 @@
   <body>
     <%= link_to '投稿', new_diary_path , method: 'get'%>
     <%= link_to '一覧', root_path , method: 'get'%>
+       <% if user_signed_in? %>
+          <a href="/users/<%=current_user.id%>"><%=current_user.name%>さん</a>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "ログイン",new_user_session_path, class: 'post' %>
+          <%= link_to "新規ユーザー登録",new_user_registration_path, class: 'post'%>
+        <% end %>
     <%= yield %>
   </body>
 </html>
