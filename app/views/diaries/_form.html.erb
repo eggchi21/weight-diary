@@ -1,0 +1,5 @@
+<%=form_for(@diary) do |f|%>
+  <%= f.label :weight,"体重" %>
+  <%= f.number_field :weight ,placeholder:70 , min:0 %>
+  <%= f.submit "送る"%>
+<%end%>

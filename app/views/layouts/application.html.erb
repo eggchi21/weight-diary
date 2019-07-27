@@ -7,9 +7,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="//www.amcharts.com/lib/3/amcharts.js"></script>
   </head>
 
   <body>
+    <%= link_to '投稿', new_diary_path , method: 'get'%>
+    <%= link_to '一覧', root_path , method: 'get'%>
     <%= yield %>
   </body>
 </html>
