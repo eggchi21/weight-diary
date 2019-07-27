@@ -20,20 +20,14 @@ am4core.useTheme(am4themes_animated);
 var chart = am4core.create("chartdiv", am4charts.XYChart);
 
 const diaries = <%== JSON.dump(@diaries) %>;
-console.log(diaries);
-
 const ids = <%== JSON.dump(@ids) %>;
-console.log(ids);
-
 const weights = <%== JSON.dump(@weights) %>;
-console.log(weights);
-
 const dates = <%== JSON.dump(@dates) %>;
 
-var first_date = new Date(dates[0])
-var last_date = new Date(dates.slice(-1)[0])
-var term_date= (last_date - first_date)/ 1000 / 60 / 60 / 24 + 1
-console.log(term_date)
+var firstDate = new Date(dates[0])
+var lastDate = new Date(dates.slice(-1)[0])
+var termDate= (lastDate - firstDate)/ 1000 / 60 / 60 / 24 + 1
+console.log(termDate)
 
 
 // Add data
@@ -67,31 +61,22 @@ chart.cursor.xAxis = dateAxis;
 chart.cursor.snapToSeries = series;
 
 function generateChartData() {
-    var chartData = [];
-    var firstDate = first_date ;
-    console.log(firstDate + 'b')
-    firstDate.setDate(firstDate.getDate());
-    console.log(firstDate+'c')
-    var weight = weights[0];
-    for (var i = 0; i < term_date; i++) {
-        var newDate = new Date(firstDate);
-        newDate.setDate(newDate.getDate() + i);
-
-        console.log(new Date(dates[i])+'a')
-        console.log(newDate)
-        if (newDate.getTime()-new Date(dates[i])==0){
-            weight =weights[i];
-        }else{
-          weight =79
-        }
-
-
+  var chartData = [];
+  var weight = weights[0];
+  for (var j =0; j< weights.length; j++){
+    for (var i = 0; i < termDate; i++) {
+      var newDate = new Date(firstDate)
+      newDate.setDate(newDate.getDate() + i); //初日からi日分たす
+      if ((new Date(dates[j])) - (newDate)==0){
+        weight =weights[j]
         chartData.push({
             date: newDate,
             weight: weight
         });
+      }
     }
-    return chartData;
+  }
+  return chartData;
 }
 
 }); // end am4core.ready()
