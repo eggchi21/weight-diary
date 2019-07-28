@@ -7,7 +7,7 @@ class DiariesController < ApplicationController
   end
 
   def show
-    @diary=Diary.find_by(params[:id])
+    @diary=Diary.find(params[:id])
   end
 
   def new
@@ -20,7 +20,7 @@ class DiariesController < ApplicationController
   end
 
   def edit
-    @diary=Diary.find_by(params[:id])
+    @diary=Diary.find(params[:id])
   end
 
   def update

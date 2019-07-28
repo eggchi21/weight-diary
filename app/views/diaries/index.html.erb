@@ -31,6 +31,7 @@ am4core.useTheme(am4themes_animated);
 var chart = am4core.create("chartdiv", am4charts.XYChart);
 const weights = <%== JSON.dump(@weights) %>;
 const dates = <%== JSON.dump(@dates) %>;
+const ids = <%== JSON.dump(@ids) %>;
 
 var firstDate = new Date(dates[0])
 var lastDate = new Date(dates.slice(-1)[0])
@@ -43,10 +44,12 @@ var termDate= (lastDate - firstDate)/ 1000 / 60 / 60 / 24 + 1
       var newDate = new Date(firstDate)
       newDate.setDate(newDate.getDate() + i); //初日からi日分たす
       if ((new Date(dates[j])) - (newDate)==0){
-        weight =weights[j]
+        weight = weights[j]
+        id = ids[j]
         chart.data.push({
             date: newDate,
-            weight: weight
+            weight: weight,
+            id: id
         });
       }
     }
@@ -79,8 +82,9 @@ series.tooltip.label.textValign = "middle";
 // Make bullets grow on hover
 var bullet = series.bullets.push(new am4charts.CircleBullet());
 bullet.circle.strokeWidth = 2;
-bullet.circle.radius = 4;
-bullet.circle.fill = am4core.color("#fff");
+bullet.circle.radius = 20;
+bullet.circle.url =`http://localhost:3000/diaries/{id.urlEncode()}`
+bullet.circle.fill = am4core.color("#15ff00");
 
 var bullethover = bullet.states.create("hover");
 bullethover.properties.scale = 1.3;
