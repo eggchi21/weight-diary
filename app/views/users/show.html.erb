@@ -26,8 +26,6 @@ const dates = <%== JSON.dump(@dates) %>;
 var firstDate = new Date(dates[0])
 var lastDate = new Date(dates.slice(-1)[0])
 var termDate= (lastDate - firstDate)/ 1000 / 60 / 60 / 24 + 1
-console.log(termDate)
-
 
 // Add data
 chart.data = generateChartData();
@@ -61,7 +59,6 @@ chart.cursor.snapToSeries = series;
 
 function generateChartData() {
   var chartData = [];
-  var weight = weights[0];
   for (var j =0; j< weights.length; j++){
     for (var i = 0; i < termDate; i++) {
       var newDate = new Date(firstDate)
