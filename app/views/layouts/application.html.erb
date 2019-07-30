@@ -11,9 +11,10 @@
   </head>
 
   <body>
-    <%= link_to '投稿', new_diary_path , method: 'get'%>
+
     <%= link_to '一覧', root_path , method: 'get'%>
     <% if user_signed_in? %>
+      <%= link_to '投稿する', new_user_diary_path(current_user.id) , method: 'get'%>
       <a href="/users/<%=current_user.id%>"><%=current_user.name%>さん</a>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     <% else %>
