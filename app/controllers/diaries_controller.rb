@@ -1,4 +1,7 @@
 class DiariesController < ApplicationController
+  def about
+  end
+
   def index
     @diaries=Diary.all.order('created_at ASC')
     @ids=@diaries.map(&:id)
