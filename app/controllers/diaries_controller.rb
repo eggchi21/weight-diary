@@ -14,6 +14,7 @@ class DiariesController < ApplicationController
   end
 
   def new
+    @user = User.find(current_user.id)
     @diary=Diary.new
   end
 
@@ -23,6 +24,7 @@ class DiariesController < ApplicationController
   end
 
   def edit
+    @user = User.find(current_user.id)
     @diary=Diary.find(params[:id])
   end
 
